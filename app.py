@@ -20,7 +20,7 @@ def predict():
 
     with torch.no_grad():
         reconstructed_data = model(data_tensor)
-        mse = torch.mean((reconstructed_data - data_tensor) ** 2, dim=1).numpy()
+        mse = torch.mean((reconstructed_data - data_tensor) ** 2, dim=1).round(decimals=4).numpy()
         anomalies = mse > 0.5
 
     return jsonify({'anomalies': anomalies.tolist(), 'mse': mse.tolist()})
